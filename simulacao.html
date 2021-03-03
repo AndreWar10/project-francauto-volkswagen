@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação Seminovos</title> <!--Nome que vai ficar na aba da página-->
+    <div>
+    
+    <style>
+    /*Configurar o Estilo da Página*/ 
+        label{
+            display: block;
+        }
+        fieldset label{
+            display: inline;
+        }
+
+        fieldset{
+            border: 1px solid lightgray;
+            border-radius: 8px;
+            width: 200px;
+        }
+
+        div, fieldset {
+            margin-bottom: 15px;
+        }
+    </style>
+    </div>
+</head>
+
+<body>
+    <div id='interface'>
+    <h1>Simulação de Veículos Seminovos</h1> <!--Título da página-->
+    
+    <!--Valor do carro-->
+    <div>
+        <label>Valor do carro</label> 
+        <input type = "number" id = "carro" placeholder="Informe o valor do carro" size="35">
+    </div>
+     
+    <!--ANO DO VEÍCULO-->
+    <div>
+        <label>Ano do veículo</label>
+        <select id = "ano_veiculo">
+            <option>(Selecione)</option>
+            <option>2010 a 2012</option>
+            <option>2007 a 2009</option>
+            <option>2004 a 2006</option>
+            <option>2000 a 2003</option>
+        </select>
+    </div>
+
+    <!--Valor entrada-->
+    <div>
+        <label>Valor de entrada</label> 
+        <input type = "number" id = "entrada" placeholder="Informe o valor de entrada" size="35">
+    </div>
+    
+    <!--<fieldset>
+        <legend>Exibição da operação</legend>
+        <input type="checkbox" id="alert">
+        <label for="alert">Exibir resultado da operação no documento</label>
+    </fieldset>-->
+
+    <div>
+        <button id="enviar">Calcular</button>
+    </div>
+
+    <div>
+        <button id="nova_op">Nova Simulação</button>
+    </div>
+    
+    <div id = "resultado"></div>
+
+    <!----------------------------------------------------------------------------------------------------------->
+     <script>
+    'use strict'
+    
+        /*Captura de elementos HTML */
+        const elValorCarro = document.getElementById('carro')
+        const elEntrada = document.getElementById('entrada')
+        const elAno = document.getElementById('ano_veiculo')
+        /*const elAlert = document.querySelector('#alert')*/
+        const elEnviar = document.querySelector('#enviar')
+        const elReset = document.querySelector('#nova_op')
+        const elResultado = document.querySelector('#resultado')
+
+        //FUNÇÃO PARA VALIDAR OS CAMPOS QUE O USUÁRIO INSERIU.
+        function validar(){
+        let valido = true
+
+        //trim(): retira espaços em branco no início e no final de uma string.. Evitando que o usuário preencha com espaçoes em branco
+        if(elValorCarro.value.trim() == ''){ //se não foi preenchida, então..
+            alert('O valor do carro deve ser informado')
+            elPrimeiroNumero.focus() // Coloca o foco no controle, cursor no campo que deu erro  
+            valido = false     
+        }
+        else if(elValorCarro.value.trim() < 0) {
+            alert('Deve ser informado um numero positivo')
+            elPrimeiroNumero.focus() // Coloca o foco no controle, cursor no campo que deu erro
+            valido = false
+        }
+        else if(elEntrada.value.trim() < 0) {
+            alert('Deve ser informado um numero positivo')
+            elEntrada.focus() // Coloca o foco no controle, cursor no campo que deu erro
+            valido = false
+        }
+        else if(elEntrada.value.trim() == ''){ //se não foi preenchida, então
+            alert('O valor de entrada deve ser informado')
+            elSegundoNumero.focus() // Coloca o foco do cursor no campo que deu erro
+            valido = false
+        }
+        else if(elAno.selectedIndex <= 0){
+            alert('Selecione o ano do carro.') 
+            elOperacao.focus()
+            valido = false
+        }           
+        /*else if(!(elAlert.checked)){
+            alert('Se você quer ver o resultado tem que marcar a opção de exibir na tela, USUÁRIO BURRO !')
+            elAlert.focus()
+            valido = false
+        } */
+        return valido
+        }
+
+        //FUNÇÃO PARA O CALCULO DAS PARCELAS.
+        function calcular(){
+                if(validar()){
+                    let resultado 
+                    let resultadoD
+                    let resultado_dois
+                    let resultado_doisD
+                    let resultado_tres
+                    let resultado_tresD
+                    let resultado_quatro
+                    let resultado_quatroD
+                    let resultado_cinco
+                    let resultado_cincoD
+                    let per_entrada 
+                    let op
+                    let op_dois
+                    let op_tres
+                    let op_quatro
+                    let op_cinco
+                    let ano
+                    let valor_t
+                    
+                    
+                    switch(elAno.selectedIndex){ 
+                        case 1: //2010 - 2012
+                        ano = '2010-2012'
+                            per_entrada = parseFloat(elEntrada.value) / parseFloat(elValorCarro.value) * 100
+                            //ENTRADA => 50%
+                            if(per_entrada >= 50){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09286
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.04982
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03549
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02915
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02617
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                            }  
+                            //ENTRADA >=40%
+                            else if (per_entrada >= 40){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09345
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05029
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03459
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02934
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02665
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                            }
+                            //ENTRADA >= 30%
+                            else if (per_entrada >= 30){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09357
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05041
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03610
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02928
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02672
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            //ENTRADA >= 20%
+                            else if (per_entrada >= 20){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09415
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05112
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03683
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02992
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02747
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            //ENTRADA >= 10%
+                            else if (per_entrada >= 10){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09498
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05208
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03777
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03089
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02859
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                               
+                            }
+                            //ENTRADA < 10%
+                            else {
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09700
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05385
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03967
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03289
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = 0
+                                resultado_cincoD = resultado_cinco 
+                                op_cinco = '60X'                                
+                            }
+                            break
+
+                        case 2: //2007-2009
+                        ano = '2007-2009'
+                        per_entrada = parseFloat(elEntrada.value) / parseFloat(elValorCarro.value) * 100
+                            if(per_entrada >= 50){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09298
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.04994
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03573
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02940
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02644
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                            }   
+                            else if (per_entrada >= 40){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09357
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05041
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03622
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02960
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02692
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 30){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09368
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05053
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03634
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02953
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02720
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                               
+                            }
+                            else if (per_entrada >= 20){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09445
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05142
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03727
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03037
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02796
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 10){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09528
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05226
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03821
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03135
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02909
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else {
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09730
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05416
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.04012
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03336
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = 0
+                                resultado_cincoD = resultado_cinco 
+                                op_cinco = '60X'    
+                                
+                            }
+                            break    
+
+                        case 3: //2004-2006
+                        ano = '2004-2006'
+                        per_entrada = parseFloat(elEntrada.value) / parseFloat(elValorCarro.value) * 100
+                            if(per_entrada >= 50){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09374
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05071
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03652
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03024
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02733
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                            }   
+                            else if (per_entrada >= 40){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09433
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05118
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03702
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03043
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02782
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 30){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09445
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05130
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03714
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03037
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02789
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 20){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09504
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05202
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03789
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03102
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02866
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 10){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09587
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05287
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03884
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03201
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.02980
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else {
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09790
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05477
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.04078
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03405
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = 0
+                                resultado_cincoD = resultado_cinco 
+                                op_cinco = '60X'    
+                                
+                            }
+                            break    
+                        
+                        default: //2000 a 2003
+                        ano = '2000-2003'
+                        per_entrada = parseFloat(elEntrada.value) / parseFloat(elValorCarro.value) * 100
+                            if(per_entrada >= 50){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09404
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05100
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03683
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03056
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value) - parseFloat(elEntrada.value)) * 0.02768
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                            }   
+                            else if (per_entrada >= 40){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09463
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05148
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03733
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03076
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value) - parseFloat(elEntrada.value)) * 0.02817
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 30){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09474
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05160
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03745
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03069
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value) - parseFloat(elEntrada.value)) * 0.02824
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 20){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09534
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05232
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03821
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03135
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value) - parseFloat(elEntrada.value)) * 0.02902
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else if (per_entrada >= 10){
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09617
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05317
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03916
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03235
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = parseFloat((elValorCarro.value) - parseFloat(elEntrada.value)) * 0.03017
+                                resultado_cincoD = resultado_cinco + 25
+                                op_cinco = "60X"
+                                
+                            }
+                            else {
+                                elValorCarro.value = parseFloat(elValorCarro.value) + (1500)
+                                resultado = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.09820
+                                resultadoD = resultado + 25
+                                op = "12X"
+                                resultado_dois = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.05508
+                                resultado_doisD = resultado_dois + 25
+                                op_dois = "24X"
+                                resultado_tres = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.04110
+                                resultado_tresD = resultado_tres + 25
+                                op_tres = "36X"
+                                resultado_quatro = parseFloat((elValorCarro.value ) - parseFloat(elEntrada.value)) * 0.03440
+                                resultado_quatroD = resultado_quatro + 25
+                                op_quatro = "48X"
+                                resultado_cinco = 0
+                                resultado_cincoD = resultado_cinco 
+                                op_cinco = '60X'    
+                               
+                            }    
+
+                    } //fechamento switch
+                
+                //Mostragem de dados em .innerText
+                elResultado.innerText = ` ENTRADA DE ${per_entrada.toFixed(5)}%
+
+                 ANO/MODELO DO CARRO: ${ano}
+                *JÁ FOI ADICIONADO A TAXA DE MANUTENÇÃO DE 1500 REAIS!
+
+                
+                CASO TENHA TRABALHADO TABELA OU PROMOCIONAL:
+                 ${op} de ${resultado.toFixed(2)} 
+                 ${op_dois} de ${resultado_dois.toFixed(2)}
+                 ${op_tres} de ${resultado_tres.toFixed(2)}
+                 ${op_quatro} de ${resultado_quatro.toFixed(2)}
+                 ${op_cinco} de ${resultado_cinco.toFixed(2)}
+
+                 
+                 CASO TENHA DADO -5% NO VALOR DO CARRO:
+                 ${op} de ${resultadoD.toFixed(2)} 
+                 ${op_dois} de ${resultado_doisD.toFixed(2)}
+                 ${op_tres} de ${resultado_tresD.toFixed(2)}
+                 ${op_quatro} de ${resultado_quatroD.toFixed(2)}
+                 ${op_cinco} de ${resultado_cincoD.toFixed(2)}
+                 `
+                }
+                elValorCarro.value = document.getElementById('carro')
+            }  //fechamento da função calcular
+        
+        //FUNÇÃO PARA O RESETAR A PÁGINA.
+        function reset(){
+            elValorCarro.value = false
+            elEntrada.value = false
+            elAno.selectedIndex = false
+            elResultado.innerHTML = false
+
+        }
+
+            //executar a função apenas qunado o botão enviar for pressionado.
+            elEnviar.addEventListener('click', calcular) 
+            //executar a função quando o botão for pressionado.
+            elReset.addEventListener('click', reset )
+    </script>
+</div>
+</body>
+</html>
