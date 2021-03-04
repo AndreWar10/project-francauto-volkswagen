@@ -1,0 +1,19 @@
+@charset "UTF-8"; /* Configuração para linguagem latina*/
+
+  /*Configurar o Estilo da Página*/ 
+label{
+    display: block;
+}
+fieldset label{
+    display: inline;
+}
+
+fieldset{
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    width: 200px;
+}
+
+div, fieldset {
+    margin-bottom: 15px;
+}

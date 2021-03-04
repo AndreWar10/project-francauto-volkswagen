@@ -1,0 +1,223 @@
+@charset "UTF-8"; /* Configuração para linguagem latina*/
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');/*Importação de fonte online*/
+@font-face{       /*Configuração da Fonte que está na pasta*/  
+    font-family: 'FonteLogo';
+    src: url("../_fonts/bubblegum-sans-regular.otf");
+}
+
+header#cabecalho h1 { /*formatar o primeiro título*/
+    font-family: 'FonteLogo', sans-serif;
+    font-size: 30pt;
+    color: #606060;
+    text-shadow: 1px 1px 1px rgba(0,0,0, .6);
+    padding: 0px;
+    margin-bottom: 0px; /*margem de baixo anulada, para juntar os dois titulos*/
+}
+
+header#cabecalho h2 { /*formatar segundo titulo*/
+    font-family: 'Titillium Web', sans-serif; /*fonte do google/fonts*/
+    font-size: 15px;
+    color: #888888;
+    padding: 0px;
+    margin-left: 7px;
+    margin-top: 0px; /*margem de cima anulada*/
+}
+
+label#anoo{
+    font-family: 'Titillium Web', sans-serif; /*fonte do google/fonts*/
+    font-size: 15px;
+    color: black;
+    padding: 0px;
+    margin-top: 0px; /*margem de cima anulada*/
+    font-weight:bold;
+}
+
+label#valor{
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 15px;
+    color: black;
+    padding: 0px;
+    margin-top: 0px; /*margem de cima anulada*/
+    font-weight:bold;
+}
+
+label#entradaa{
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 15px;
+    color: black;
+    padding: 0px;
+    margin-top: 10px; /*margem de cima anulada*/
+    margin-left: 0px;    
+    font-weight:bold;
+}
+
+input#entrada{
+    font-family: 'FonteLogo', sans-serif; /*fonte do google/fonts*/
+    font-size: 15px;
+    color: black;
+    height: 30px;
+}
+
+input#carro{
+    font-family: 'FonteLogo', sans-serif; /*fonte do google/fonts*/
+    font-size: 15px;
+    color: black;
+    height: 30px;
+}
+
+select#ano_veiculo{
+    font-family: 'FonteLogo', sans-serif; /*fonte do google/fonts*/
+    font-size: 15px;
+    color: black;
+    height: 30px;
+}
+
+div#teste{
+    background-color:none;
+    margin-top: 30px;
+    height: 150px;
+}
+
+
+header#cabecalho img#logo_volks{
+    position: absolute; /*para poder movimentar livremente na tela*/
+    left: 440px;
+    top: 18px;
+}
+
+header#cabecalho {
+    border-bottom: 1px #606060 solid;
+    height: 80px;
+    background: url('../_imagens/volks.png no-repeat 0px 80px;') /*imagem do logo google glass como background(macete)*/
+}
+
+input#carro{
+    height: 30px;
+}
+
+figure.volks img{ /*Tudo que for -img- terá largura e altura 100%*/
+    width: 7%;
+    height: 12.5%;
+    
+}
+
+label{
+    display: block;
+    height: 30px;
+    
+}
+fieldset label{
+    display: inline;
+}
+
+fieldset{
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    width: 200px;
+}
+
+div, fieldset {
+    margin-bottom: 15px;
+}
+
+button#nova_op{
+    margin-top: 100px;
+    height: 40px;
+}
+
+button#nova_op{
+    margin-top: 8px;
+    height: 30px;
+}
+
+button#enviar{
+    margin-top: 100px;
+    height: 40px;
+}
+
+div#resultado{
+    width: 500px;
+    margin-top: 10px;
+    position: relative;
+    background-color: rgb(240, 240, 243);
+    padding:8px 10px;
+    font-family: 'Titillium Web', sans-serif;  
+}
+
+/*#conteudoEsq {
+	position:absolute;
+	width:190px;
+	top:60px;
+	left:5px;
+	color:#99f;
+	padding-bottom:20px;
+	border-bottom:3px double #666;
+}*/
+
+div#esquerda {
+        position:absolute;
+        width:150px;
+        top:100px;
+        left:20px;
+        color:#99f;
+        padding-bottom:20px;
+        
+}
+
+/*width: 500px;
+    height: 400px;
+    float: right;*/
+
+div#direita{
+    margin-top: 25px;
+    position:absolute;
+        width:150px;
+        top:100px;
+        left:400px;
+        color: black;
+        padding-bottom:40px;
+        
+}
+
+/*PERSONALIZAR CLASSE DOS BOTÕES*/
+.bt {
+    border:1px solid #25692A; /*Define o estilo da borda (espessura em pixels e tipo da borda); */
+    border-radius:4px; /*Define o raio da borda em pixels; */
+    display:block; /*Garante que tanto os links e os botões tenham a mesma altura; */
+    cursor:pointer; /*Garante que a imagem da "mãozinha" apareça quando o leitor passar com o mouse sobre o botão. */
+    font-family: 'Titillium Web', sans-serif;/*Define a família da fonte; */
+    font-weight:bold; /*Espessura da fonte; */
+    font-size:15px; /*O tamanho da fonte em pixels; */
+    padding:5px 9px; /*Espaçamento de 6px em cima e em baixo e de 10px nas laterias direita e esquerda; */
+    text-decoration:none; /*Remove a linha sob o texto dos links. */
+    }
+
+    .bt-vd {
+        border-color:#68b465;
+        background:linear-gradient(to bottom, #bce6bb 5%, #73ca70  100%);
+        box-shadow:inset 0px 1px 0px 0px #e3f1e3;/*Define a sombra no contorno do botão (utilize o tom mais claro)*/
+        color: rgb(255, 255, 255);
+        text-shadow:0px 1px 0px #528009; /*Define a sombra no texto*/
+        }    
+    
+    .bt-vd:hover {
+        background:linear-gradient(to bottom,white 0%, rgb(11, 114, 44) 100%); /* Define o gradiente linear da cor (sentido to bottom, cor mais clara e cor mais escura)*/
+        color: black;
+        }    
+    
+    .bt-az {
+        border-color:#46a7f5;
+        background:linear-gradient(to bottom, #71baf1 5%, rgb(76, 99, 199) 100%);
+        box-shadow:inset 0px 1px 0px 0px #d7ecfd;
+        color:#fff;
+        text-shadow:0px 1px 0px #528009;  
+        }  
+        
+    .bt-az:hover {
+        background:linear-gradient(to bottom, white 0%,  rgb(34, 14, 105) 100%);
+        color: black;
+        }        
+    
+    .bt:active {
+        position:relative;
+        top:2px;}    

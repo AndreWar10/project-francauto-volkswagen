@@ -4,43 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulação Seminovos</title> <!--Nome que vai ficar na aba da página-->
-    <div>
-    
-    <style>
-    /*Configurar o Estilo da Página*/ 
-        label{
-            display: block;
-        }
-        fieldset label{
-            display: inline;
-        }
-
-        fieldset{
-            border: 1px solid lightgray;
-            border-radius: 8px;
-            width: 200px;
-        }
-
-        div, fieldset {
-            margin-bottom: 15px;
-        }
-    </style>
-    </div>
+    <link rel= "stylesheet"  href="_css/stile.css"/>
 </head>
 
 <body>
     <div id='interface'>
-    <h1>Simulação de Veículos Seminovos</h1> <!--Título da página-->
+       
+    <header id='cabecalho'>    
+    <hgroup>    
+    <h1>Francauto Volkswagen</h1> <!--Título da página-->
+    <h2>Simulação de Veículos Seminovos</h2>
+    </hgroup>
     
+    <figure class='volks'>
+    <img id ='logo_volks' src='_imagens/volks.png'>
+    </figure>
+
+    </header>
+    <div id='conteudo'>
+
+    <!--PARTE ESQUERDA-->    
+    <div id='esquerda'>        
     <!--Valor do carro-->
+    <div id='teste'>
     <div>
-        <label>Valor do carro</label> 
+        <label id='valor'>Valor do carro:</label> 
         <input type = "number" id = "carro" placeholder="Informe o valor do carro" size="35">
     </div>
      
     <!--ANO DO VEÍCULO-->
     <div>
-        <label>Ano do veículo</label>
+        <label id = 'anoo'>Ano do veículo:</label>
         <select id = "ano_veiculo">
             <option>(Selecione)</option>
             <option>2010 a 2012</option>
@@ -52,27 +46,27 @@
 
     <!--Valor entrada-->
     <div>
-        <label>Valor de entrada</label> 
+        <label id='entradaa'>Valor de entrada:</label> 
         <input type = "number" id = "entrada" placeholder="Informe o valor de entrada" size="35">
     </div>
+    </div>
     
-    <!--<fieldset>
-        <legend>Exibição da operação</legend>
-        <input type="checkbox" id="alert">
-        <label for="alert">Exibir resultado da operação no documento</label>
-    </fieldset>-->
-
     <div>
-        <button id="enviar">Calcular</button>
+        <nav id='menu'>
+        <button class="bt bt-vd" id="enviar">Calcular:</button>
+        </nav>
     </div>
 
     <div>
-        <button id="nova_op">Nova Simulação</button>
+        <button class="bt bt-az" id="nova_op">Nova Simulação:</button>
     </div>
+        </div>
     
+        <div id='direita'>
     <div id = "resultado"></div>
-
-    <!----------------------------------------------------------------------------------------------------------->
+        </div>
+    </div>
+ <!----------------------------------------------------------------------------------------------------------->
      <script>
     'use strict'
     
@@ -84,7 +78,7 @@
         const elEnviar = document.querySelector('#enviar')
         const elReset = document.querySelector('#nova_op')
         const elResultado = document.querySelector('#resultado')
-
+      
         //FUNÇÃO PARA VALIDAR OS CAMPOS QUE O USUÁRIO INSERIU.
         function validar(){
         let valido = true
@@ -115,11 +109,6 @@
             elOperacao.focus()
             valido = false
         }           
-        /*else if(!(elAlert.checked)){
-            alert('Se você quer ver o resultado tem que marcar a opção de exibir na tela, USUÁRIO BURRO !')
-            elAlert.focus()
-            valido = false
-        } */
         return valido
         }
 
@@ -625,29 +614,27 @@
                     } //fechamento switch
                 
                 //Mostragem de dados em .innerText
-                elResultado.innerText = ` ENTRADA DE ${per_entrada.toFixed(5)}%
-
+                elResultado.innerText = ` ENTRADA DE ${per_entrada.toFixed(3)}%
                  ANO/MODELO DO CARRO: ${ano}
-                *JÁ FOI ADICIONADO A TAXA DE MANUTENÇÃO DE 1500 REAIS!
 
-                
                 CASO TENHA TRABALHADO TABELA OU PROMOCIONAL:
                  ${op} de ${resultado.toFixed(2)} 
                  ${op_dois} de ${resultado_dois.toFixed(2)}
                  ${op_tres} de ${resultado_tres.toFixed(2)}
                  ${op_quatro} de ${resultado_quatro.toFixed(2)}
                  ${op_cinco} de ${resultado_cinco.toFixed(2)}
-
-                 
+     
                  CASO TENHA DADO -5% NO VALOR DO CARRO:
                  ${op} de ${resultadoD.toFixed(2)} 
                  ${op_dois} de ${resultado_doisD.toFixed(2)}
                  ${op_tres} de ${resultado_tresD.toFixed(2)}
                  ${op_quatro} de ${resultado_quatroD.toFixed(2)}
                  ${op_cinco} de ${resultado_cincoD.toFixed(2)}
+
+                 *JÁ FOI ADICIONADO A TAXA DE MANUTENÇÃO DE 1500 REAIS!
                  `
                 }
-                elValorCarro.value = document.getElementById('carro')
+                elValorCarro.value = parseFloat(elValorCarro.value) - (1500)
             }  //fechamento da função calcular
         
         //FUNÇÃO PARA O RESETAR A PÁGINA.
@@ -655,8 +642,7 @@
             elValorCarro.value = false
             elEntrada.value = false
             elAno.selectedIndex = false
-            elResultado.innerHTML = false
-
+            elResultado.innerHTML = ''
         }
 
             //executar a função apenas qunado o botão enviar for pressionado.
