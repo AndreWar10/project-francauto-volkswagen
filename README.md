@@ -4,10 +4,8 @@
 
 Projeto desenvolvido com o intuito de automatizar as simulações feitas até então manualmente na concessionária
 
-- 🎂 19 Anos
-- 💼 Aberto para novas oportunidades.
-- ❤️ Gosto de Front-end e Back-end.
-- 📖 Atualmente cursando Análise e Desenvolvimento de Sistemas
+<img src="https://img.shields.io/badge/-Github-1C1C1C?style=for-the-badge&logo=Github&logoColor=00FFFF&link=https://github.com/AndreWar10/"/>
+
 
 ## 📚 Seções
   A plataforma é composta por apenas uma seção:
