@@ -19,7 +19,7 @@ Projeto desenvolvido com o intuito de automatizar as simulações feitas até en
 ## 🦄 Autor
 <strong>ANDRÉ GUERRA</strong><br>
 <div>
-<a href="https://www.linkedin.com/in/andr%C3%A9-guerra-santos-b54b281b6/" alt="Linkedin">
+<a href="https://github.com/AndreWar10/" alt="Github">
 <img src="https://img.shields.io/badge/-Github-1C1C1C?style=for-the-badge&logo=Github&logoColor=00FFFF&link=https://github.com/AndreWar10/"/>
 </a>
 </div>
